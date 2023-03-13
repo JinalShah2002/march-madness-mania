@@ -110,6 +110,80 @@ def get_every_season_record(raw_data:pd.DataFrame) -> dict:
     # returning the dictionary with the records
     return final_record_info
 
+def aggregate(raw_data: pd.DataFrame,statistic:str) -> pd.DataFrame:
+    """
+    aggregate_by_mean
+
+    A function to aggregate the box score by the specified statistic
+    for every season for every team.
+
+    inputs:
+    - raw_data: the raw data with all the box scores
+    - statistic: the statistic to aggregate by (options are mean, median, or standard deviation)
+    outputs:
+    - a dataframe with the aggregated box scores by mean 
+    
+    """
+    # Getting the names of the columns for the winners and losers
+    winning_cols = []
+    losing_cols = []
+    for column in raw_data.columns:
+        if column[0] == 'W' and column != 'WLoc':
+            winning_cols.append(column)
+        elif column[0] == 'L':
+            losing_cols.append(column)
+
+    # Getting the mens record information for each team for each season
+    seasons = list(raw_data['Season'].unique())
+
+    # Creating the final dataframe to return
+    final_df = None
+
+    # Renaming the columns so we can line up
+    # Stripping the first letter (W or L)
+    winning_replace = {}
+    loser_replace = {}
+    for column in winning_cols:
+        new_col_name = column[1:]
+        winning_replace[column] = new_col_name
+        loser_replace['L'+new_col_name] = new_col_name
+
+    # Iterating through the seasons
+    for season in seasons:
+        # Getting the season data
+        season_data = raw_data[raw_data['Season']==season]
+
+        # Getting the winners and losers dataframes
+        winning = season_data[winning_cols]
+        losing = season_data[losing_cols]
+
+        # Renaming the columns
+        winning.rename(columns=winning_replace,inplace=True)
+        losing.rename(columns=loser_replace,inplace=True)
+
+        # Getting the statistic of the stats
+        if statistic.lower() == 'mean':
+            team_stats = pd.concat([winning,losing],axis=0).groupby(by='TeamID',axis='index').mean()
+        elif statistic.lower() == 'median':
+            team_stats = pd.concat([winning,losing],axis=0).groupby(by='TeamID',axis='index').median()
+        else:
+            team_stats = pd.concat([winning,losing],axis=0).groupby(by='TeamID',axis='index').std()
+
+        team_stats.reset_index(inplace=True)
+
+        # Adding the season
+        team_stats['Season'] = season
+
+        # Adding it to the final dataframe
+        if final_df is None:
+            final_df = team_stats
+        else:
+            final_df = pd.concat([final_df,team_stats],axis=0)
+    
+    # Returning the final df
+    return final_df
+
+
 # Main Method
 if __name__ == '__main__':
     # Getting the datasets
@@ -122,7 +196,20 @@ if __name__ == '__main__':
     mens_records.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/mens_reg_szn_records.csv')
     womens_records.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/womens_reg_szn_records.csv')
     
-    
+    # Getting the statistics and saving to a csv
+    mens_avg = aggregate(mens_reg,statistic='mean')
+    mens_median = aggregate(mens_reg,statistic='median')
+    mens_std = aggregate(mens_reg,statistic='standard deviation')
+    mens_avg.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/mens_reg_szn_avgs.csv')
+    mens_median.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/mens_reg_szn_median.csv')
+    mens_std.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/mens_reg_szn_std.csv')
+    womens_avg = aggregate(womens_reg,statistic='mean')
+    womens_median = aggregate(womens_reg,statistic='median')
+    womens_std = aggregate(womens_reg,statistic='standard deviation')
+    womens_avg.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/womens_reg_szn_avgs.csv')
+    womens_median.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/womens_reg_szn_median.csv')
+    womens_std.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/regular-season-statistics/womens_reg_szn_std.csv')
+
 
 
 
