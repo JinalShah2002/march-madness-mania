@@ -328,20 +328,23 @@ class AddFeatures():
 # Main Method to transform all the data
 if __name__ == '__main__':
     # Getting the data sets
-    men_reg = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /MRegularSeasonDetailedResults.csv')
-    men_tourney = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /MNCAATourneyDetailedResults.csv')
-    women_reg = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /WRegularSeasonDetailedResults.csv')
-    women_tourney = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /WNCAATourneyDetailedResults.csv')
+    men_reg = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/raw-data/MRegularSeasonDetailedResults.csv')
+    # men_tourney = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /MNCAATourneyDetailedResults.csv')
+    women_reg = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/raw-data/WRegularSeasonDetailedResults.csv')
+    # women_tourney = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/Actual Data /WNCAATourneyDetailedResults.csv')
 
     # Creating the pipeline object
     features = AddFeatures()
 
     # Putting each file through the pipeline
     final_data = features.transform(men_reg)
-    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/men_reg.csv')
-    final_data = features.transform(men_tourney)
-    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/men_tourney.csv')
+    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/expanded-features/men_reg.csv')
+    # final_data = features.transform(men_tourney)
+    # final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/men_tourney.csv')
     final_data = features.transform(women_reg)
-    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/women_reg.csv')
-    final_data = features.transform(women_tourney)
-    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/women_tourney.csv')
+    final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/expanded-features/women_reg.csv')
+    # final_data = features.transform(women_tourney)
+    # final_data.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/data/data-preprocessed/women_tourney.csv')
+
+    # Final edit is to comment out feature engineering the tourney since we don't need it.
+    # We need to predict the tournament results based on the regular season statistics.
