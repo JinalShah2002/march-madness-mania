@@ -33,21 +33,27 @@ initial_womens_data['LowerWin?'] = initial_womens_data['WTeamID'] < initial_wome
 initial_mens_data['LowerWin?']= initial_mens_data['LowerWin?'].astype(int)
 initial_womens_data['LowerWin?']= initial_womens_data['LowerWin?'].astype(int)
 
-# Renaming the columns to split up the teams in the games properly
-initial_mens_data.rename(columns={'WTeamID':'TeamA','LTeamID':'TeamB'},inplace=True)
-initial_womens_data.rename(columns={'WTeamID':'TeamA','LTeamID':'TeamB'},inplace=True)
+# Setting which team is the higher and which team is the lower
+initial_mens_data['lower_TeamID'] = initial_mens_data[['WTeamID','LTeamID']].min(axis=1)
+initial_mens_data['higher_TeamID'] = initial_mens_data[['WTeamID','LTeamID']].max(axis=1)
+initial_womens_data['lower_TeamID'] = initial_womens_data[['WTeamID','LTeamID']].min(axis=1)
+initial_womens_data['higher_TeamID'] = initial_womens_data[['WTeamID','LTeamID']].max(axis=1)
 
-# Splitting up the data into team A and team B for merging purposes of the features
-team_a_mens = initial_mens_data.drop(['TeamB'],axis=1)
-team_b_mens = initial_mens_data.drop(['TeamA','LowerWin?'],axis=1)
-team_a_womens = initial_womens_data.drop(['TeamB'],axis=1)
-team_b_womens = initial_womens_data.drop(['TeamA','LowerWin?'],axis=1)
+# Dropping the winning and losing id columns
+initial_mens_data.drop(['WTeamID','LTeamID'],axis=1,inplace=True)
+initial_womens_data.drop(['WTeamID','LTeamID'],axis=1,inplace=True)
 
-# Renaming the columns so that we can merge the statistics in
-team_a_mens.rename(columns={'TeamA':'TeamID'},inplace=True)
-team_b_mens.rename(columns={'TeamB':'TeamID'},inplace=True)
-team_a_womens.rename(columns={'TeamA':'TeamID'},inplace=True)
-team_b_womens.rename(columns={'TeamB':'TeamID'},inplace=True)
+# Splitting up the data into lower and higher for merging purposes of the features
+team_lower_mens = initial_mens_data.drop(['higher_TeamID'],axis=1)
+team_higher_mens = initial_mens_data.drop(['lower_TeamID','LowerWin?'],axis=1)
+team_lower_womens = initial_womens_data.drop(['higher_TeamID'],axis=1)
+team_higher_womens = initial_womens_data.drop(['lower_TeamID','LowerWin?'],axis=1)
+
+# # Renaming the columns so that we can merge the statistics in
+team_lower_mens.rename(columns={'lower_TeamID':'TeamID'},inplace=True)
+team_higher_mens.rename(columns={'higher_TeamID':'TeamID'},inplace=True)
+team_lower_womens.rename(columns={'lower_TeamID':'TeamID'},inplace=True)
+team_higher_womens.rename(columns={'higher_TeamID':'TeamID'},inplace=True)
 
 """
 
@@ -94,53 +100,53 @@ mens_std_reg_szn.rename(columns=rename_std_cols,inplace=True)
 womens_std_reg_szn.rename(columns=rename_std_cols,inplace=True)
 
 # Merging the record information
-team_a_mens = team_a_mens.merge(mens_record_info,how='left',on=['Season','TeamID'])
-team_b_mens = team_b_mens.merge(mens_record_info,how='left',on=['Season','TeamID'])
-team_a_womens = team_a_womens.merge(womens_record_info,how='left',on=['Season','TeamID'])
-team_b_womens = team_b_womens.merge(womens_record_info,how='left',on=['Season','TeamID'])
+team_lower_mens = team_lower_mens.merge(mens_record_info,how='left',on=['Season','TeamID'])
+team_higher_mens = team_higher_mens.merge(mens_record_info,how='left',on=['Season','TeamID'])
+team_lower_womens = team_lower_womens.merge(womens_record_info,how='left',on=['Season','TeamID'])
+team_higher_womens = team_higher_womens.merge(womens_record_info,how='left',on=['Season','TeamID'])
 
 # Merging the means
-team_a_mens = team_a_mens.merge(mens_mean_reg_szn,how='left',on=['Season','TeamID'])
-team_b_mens = team_b_mens.merge(mens_mean_reg_szn,how='left',on=['Season','TeamID'])
-team_a_womens = team_a_womens.merge(womens_mean_reg_szn,how='left',on=['Season','TeamID'])
-team_b_womens = team_b_womens.merge(womens_mean_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_mens = team_lower_mens.merge(mens_mean_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_mens = team_higher_mens.merge(mens_mean_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_womens = team_lower_womens.merge(womens_mean_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_womens = team_higher_womens.merge(womens_mean_reg_szn,how='left',on=['Season','TeamID'])
 
 # Merging the medians
-team_a_mens = team_a_mens.merge(mens_median_reg_szn,how='left',on=['Season','TeamID'])
-team_b_mens = team_b_mens.merge(mens_median_reg_szn,how='left',on=['Season','TeamID'])
-team_a_womens = team_a_womens.merge(womens_median_reg_szn,how='left',on=['Season','TeamID'])
-team_b_womens = team_b_womens.merge(womens_median_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_mens = team_lower_mens.merge(mens_median_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_mens = team_higher_mens.merge(mens_median_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_womens = team_lower_womens.merge(womens_median_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_womens = team_higher_womens.merge(womens_median_reg_szn,how='left',on=['Season','TeamID'])
 
 # Merging the standard deviations
-team_a_mens = team_a_mens.merge(mens_std_reg_szn,how='left',on=['Season','TeamID'])
-team_b_mens = team_b_mens.merge(mens_std_reg_szn,how='left',on=['Season','TeamID'])
-team_a_womens = team_a_womens.merge(womens_std_reg_szn,how='left',on=['Season','TeamID'])
-team_b_womens = team_b_womens.merge(womens_std_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_mens = team_lower_mens.merge(mens_std_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_mens = team_higher_mens.merge(mens_std_reg_szn,how='left',on=['Season','TeamID'])
+team_lower_womens = team_lower_womens.merge(womens_std_reg_szn,how='left',on=['Season','TeamID'])
+team_higher_womens = team_higher_womens.merge(womens_std_reg_szn,how='left',on=['Season','TeamID'])
 
 # Renaming columns to distinguish 
-rename_cols_a = {}
-rename_cols_b = {}
+rename_cols_lower = {}
+rename_cols_higher = {}
 
-for column in team_a_mens.columns:
-    rename_cols_a[column] = 'A_'+column
+for column in team_lower_mens.columns:
+    rename_cols_lower[column] = 'lower_'+column
 
-for column in team_b_mens.columns:
-    rename_cols_b[column] = 'B_'+column
+for column in team_higher_mens.columns:
+    rename_cols_higher[column] = 'higher_'+column
 
-team_a_mens.rename(columns=rename_cols_a,inplace=True)
-team_b_mens.rename(columns=rename_cols_b,inplace=True)
-team_a_womens.rename(columns=rename_cols_a,inplace=True)
-team_b_womens.rename(columns=rename_cols_b,inplace=True)
+team_lower_mens.rename(columns=rename_cols_lower,inplace=True)
+team_higher_mens.rename(columns=rename_cols_higher,inplace=True)
+team_lower_womens.rename(columns=rename_cols_lower,inplace=True)
+team_higher_womens.rename(columns=rename_cols_higher,inplace=True)
 
 # Concatenating to a final dataset
-final_dataset_mens = pd.concat([team_a_mens,team_b_mens],axis=1)
-final_dataset_womens = pd.concat([team_a_womens,team_b_womens],axis=1)
+final_dataset_mens = pd.concat([team_lower_mens,team_higher_mens],axis=1)
+final_dataset_womens = pd.concat([team_lower_womens,team_higher_womens],axis=1)
 
 # Some column renaming and adjustments to be done:
-final_dataset_mens.drop(['B_Season'],axis=1,inplace=True)
-final_dataset_mens.rename(columns={'A_LowerWin?':'LowerWin?','A_Season':'Season'},inplace=True)
-final_dataset_womens.drop(['B_Season'],axis=1,inplace=True)
-final_dataset_womens.rename(columns={'A_LowerWin?':'LowerWin?','A_Season':'Season'},inplace=True)
+final_dataset_mens.drop(['higher_Season'],axis=1,inplace=True)
+final_dataset_mens.rename(columns={'lower_LowerWin?':'LowerWin?','lower_Season':'Season'},inplace=True)
+final_dataset_womens.drop(['higher_Season'],axis=1,inplace=True)
+final_dataset_womens.rename(columns={'lower_LowerWin?':'LowerWin?','lower_Season':'Season'},inplace=True)
 
 # Saving the datasets
 final_dataset_mens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/training-data/mens.csv')
