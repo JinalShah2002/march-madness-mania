@@ -1,6 +1,7 @@
 # Ignoring the data
 raw-data/
 preprocessed-data/
+models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
