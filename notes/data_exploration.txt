@@ -1,0 +1,4 @@
+This text file will hold any and all findings that came from data exploration:
+
+- Training data had a roughly 50/50 split in terms of if the lower team
+won the game. 
