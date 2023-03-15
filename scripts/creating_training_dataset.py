@@ -148,6 +148,10 @@ final_dataset_mens.rename(columns={'lower_LowerWin?':'LowerWin?','lower_Season':
 final_dataset_womens.drop(['higher_Season'],axis=1,inplace=True)
 final_dataset_womens.rename(columns={'lower_LowerWin?':'LowerWin?','lower_Season':'Season'},inplace=True)
 
+# Creating a feature indicating the type of games each game is 
+final_dataset_mens['Bracket'] = 'M'
+final_dataset_womens['Bracket'] = 'W'
+
 # Saving the datasets
 final_dataset_mens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/training-data/mens.csv')
 final_dataset_womens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/preprocessed-data/training-data/womens.csv')

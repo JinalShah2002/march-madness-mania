@@ -1,0 +1,5 @@
+cd scripts
+poetry run python3 feature_engineering.py
+poetry run python3 get_regular_season_stats.py 
+poetry run python3 creating_training_dataset.py 
+poetry run python3 splitting_data.py 

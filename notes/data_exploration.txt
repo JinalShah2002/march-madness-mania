@@ -2,3 +2,8 @@ This text file will hold any and all findings that came from data exploration:
 
 - Training data had a roughly 50/50 split in terms of if the lower team
 won the game. 
+- Feature Heatmap shows that there are some features that have high linear correlations (looks like this is mainly 
+ones where it is the mean and median of a feature. We may have to look into dimensionality reduction to reduce the feature
+set down.)
+- Lot more mens games than womens games
+    - Reason looks to be since the mens games data goes back further than the womens games.
