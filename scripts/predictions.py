@@ -71,7 +71,7 @@ womens_teams = pd.read_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/
 team_mens_lower = team_mens_lower.merge(mens_teams,how='left',on=['TeamID'])
 team_mens_higher = team_mens_higher.merge(mens_teams,how='left',on=['TeamID'])
 team_womens_lower = team_womens_lower.merge(womens_teams,how='left',on=['TeamID'])
-team_womens_higher = team_womens_higher.merge(mens_teams,how='left',on=['TeamID'])
+team_womens_higher = team_womens_higher.merge(womens_teams,how='left',on=['TeamID'])
 
 # Renaming columns prior to adding together
 rename_cols_lower = {}
@@ -95,5 +95,5 @@ final_womens = pd.concat([team_womens_lower,team_womens_higher],axis=1)
 # print(final_mens[['lower_TeamName','higher_TeamName']])
 
 # Save each for easy lookup
-final_mens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/final_submission_mens.csv')
-final_womens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/final_submission_womens.csv')
+final_mens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/submissions/final_submission_mens.csv')
+final_womens.to_csv('/Users/jinalshah/Jinal/Projects/march-madness-mania/submissions/final_submission_womens.csv')
