@@ -3,6 +3,8 @@ raw-data/
 preprocessed-data/
 models/
 notebooks/catboost_info/
+scripts/catboost_info/
+submissions/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
