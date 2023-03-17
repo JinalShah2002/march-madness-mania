@@ -1,5 +1,5 @@
 This textfile will serve as a log for how the model performs over the 2023 tournament
 
 
-Day 1: 3/16
+Day 1: 3/16/2023
 - Got 6/16 (37.5%) of games correct
