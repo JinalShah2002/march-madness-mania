@@ -43,8 +43,6 @@ One final thing to note is how I am evaluating the model The model is being eval
 
 ## Next Steps
 - Build a proper preprocessing pipeline that can automate the preprocessing of the data (box scores to actual model ready data).
-- Read more papers to improve our feature set so that we can elevate the model's performance.
+- Read more papers to improve our feature set so that we can elevate the model's performance (engineering better features).
 - Build a UI/UX so that this can become an actual application with a frontend that a user can use.
 - Build a smooth pipeline such that we can send in 2 team names and get a prediction.
-
-## Final Notes
