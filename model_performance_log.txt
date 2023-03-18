@@ -1,5 +1,33 @@
 This textfile will serve as a log for how the model performs over the 2023 tournament
 
+Men’s Bracket
+Round of 64 Accuracy: 15/32 = 46.875%
+Round of 32 Accuracy:
+Sweet 16 Accuracy:
+Elite 8 Accuracy:
+Final 4 Accuracy:
+Championship Accuracy: 
 
-Day 1: 3/16/2023
-- Got 6/16 (37.5%) of games correct
+Day 1: 
+- Date: 3/16
+- Round: Round of 64 
+- Accuracy: 6/16 correct
+
+Day 2: 
+- Date: 3/17
+- Round: Round of 64 
+- Accuracy: 9/16 Correct
+
+
+Women’s Bracket
+Round of 64 Accuracy:
+Round of 32 Accuracy:
+Sweet 16 Accuracy:
+Elite 8 Accuracy:
+Final 4 Accuracy:
+Championship Accuracy: 
+
+Day 1:
+- Date 3/17
+- Round: Round of 64
+- Accuracy: 13/16 Correct
