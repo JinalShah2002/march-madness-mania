@@ -7,7 +7,7 @@ To be able to develop a machine learning & data science backed solution that is 
 ## Project Details
 As an avid basketball fan and an upcoming data scientist, I decided to tackle the [2023 Kaggle March Machine Learning Mania Challenge](https://www.kaggle.com/competitions/march-machine-learning-mania-2023/overview). Just to clarify, March Madness is a tournament where NCAA college basketball teams compete against each other. This tournament happens annually, and millions of people try to build the perfect bracket: you predict every game perfectly in terms of who wins and who loses. However, the probability of such a bracket being created is 1 in 120.2 billion. 
 
-I wanted to see if I could use my machine learning and data science expertise to my advantage. Furthermore, I wanted to see if using machine learning & data science gives you an edge in terms of predicting who wins each game. Let's take a look at the project goals.
+I wanted to see if I could use my machine learning and data science expertise to my advantage. Furthermore, I wanted to see if using machine learning & data science gives you an edge in terms of predicting who wins each game. Now that we have covered the background of the project, let's take a look at the project goals.
 
 ## Project Goals:
 __Main Goal:__ Engineer a data science & machine learning backed solution to predict outcomes of games in the NCAA college basketball tournament (for both Men's and Women's).
