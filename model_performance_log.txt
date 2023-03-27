@@ -3,22 +3,22 @@ I am simply measuring accuracy (how accurate the model is predicting the games).
 
 Men’s Bracket
 Round of 64 Accuracy: 15/32 = 46.875%
-Round of 32 Accuracy: 12/16 = 75%
-Sweet 16 Accuracy: /8
-Elite 8 Accuracy: /4
+Round of 32 Accuracy: 12/16 = 75.0%
+Sweet 16 Accuracy: 3/8 = 37.5%
+Elite 8 Accuracy: 3/4 = 75.0%
 Final 4 Accuracy: /2
 Championship Accuracy: /1
-Overall Accuracy: 27/48 = 56.25%
+Overall Accuracy: 33/60 = 55%
 
 
 Women’s Bracket
 Round of 64 Accuracy: 25/32 = 78.125%
 Round of 32 Accuracy:  10/16 = 62.5%
-Sweet 16 Accuracy: /8
+Sweet 16 Accuracy: 4/8 = 50.0%
 Elite 8 Accuracy: /4
 Final 4 Accuracy: /2
 Championship Accuracy: /1
-Overall Accuracy: 35/48 = 72.917%
+Overall Accuracy: 39/56 = 69.64%
 
-Overall Accuracy (Mens + Womens): 62/96 = 64.583%
+Overall Accuracy (Mens + Womens): 72/116 = 62.07%
 
