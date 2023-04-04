@@ -6,9 +6,9 @@ Round of 64 Accuracy: 15/32 = 46.875%
 Round of 32 Accuracy: 12/16 = 75%
 Sweet 16 Accuracy: 3/8
 Elite 8 Accuracy: 3/4
-Final 4 Accuracy: /2
-Championship Accuracy: /1
-Overall Accuracy: 33/60 = 55%
+Final 4 Accuracy: 1/2
+Championship Accuracy: 1/1
+Overall Accuracy: 35/63 = 55.56%
 
 
 Women’s Bracket
@@ -17,7 +17,7 @@ Round of 32 Accuracy:  10/16 = 62.5%
 Sweet 16 Accuracy: 4/8
 Elite 8 Accuracy: 3/4
 Final 4 Accuracy: 1/2
-Championship Accuracy: /1
-Overall Accuracy: 43/62 = 69.35%
+Championship Accuracy: 1/1
+Overall Accuracy: 44/63 = 69.84%
 
-Overall Accuracy (Mens + Womens): 76/122 = 62.30%
+Overall Accuracy (Mens + Womens): 79/126 = 62.70% 

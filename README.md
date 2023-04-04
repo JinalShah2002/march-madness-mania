@@ -38,6 +38,9 @@ One final thing to note is how I am evaluating the model The model is being eval
 - [Poetry](https://python-poetry.org/): A Python dependency management system.
 - [Pickle](https://docs.python.org/3/library/pickle.html): Python Object Serialization, helps with saving models.
 
+## Project Results
+The way I monitored project results was to (a) submit the predictions to the Kaggle competition (of course) and (b) leverage the model to create brackets for both the Men's and Women's games. From the prediction side of things, overall, the model was able to predict games with a __62.5%__ accuracy. However, what is to be noted here is the huge disparity between the accuracies for the Men's games and the Women's games. The model was able to predict the Men's games with a __55.56%__ accuracy and was able to predict the Women's games with a __69.84%__ accuracy. Obviously, there is a big gap in the accuracies and this reflected in the brackets. My men's bracket earned 290/1920 possible points on the ESPN bracket challenge. A lot of this can be attributed to the model's inability to predict the men's games at a high accuracy, which resulted in a lot of misses in the round of 64 which led to the entire bracket being thrown off. The women's bracket, on the other hand, earned 890/1920 possible points on the ESPN bracket challenge. Again, this can be attributed to a high accuracy in predicting the games correctly throughout. Obviously, some improvements are needed, but this is a good start.
+
 ## References
 - [Predicting college basketball match outcomes using machine learning techniques: some results and lessons learned](https://www.researchgate.net/publication/257749099_Predicting_college_basketball_match_outcomes_using_machine_learning_techniques_some_results_and_lessons_learned): A research paper published in 2013 that provided me with some ideas on features to create and models to try. Also gave me some insight on what some key predictors might be.
 
@@ -46,3 +49,5 @@ One final thing to note is how I am evaluating the model The model is being eval
 - Read more papers to improve our feature set so that we can elevate the model's performance (engineering better features).
 - Build a UI/UX so that this can become an actual application with a frontend that a user can use.
 - Build a smooth pipeline such that we can send in 2 team names and get a prediction.
+- Understand and analyze the errors made by the model in the 2023 tournament. 
+- Perform more feature analysis to better engineer our feature set.
